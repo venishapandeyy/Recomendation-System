@@ -1,0 +1,59 @@
+{%extends 'base.html'%}
+<!--    <link rel="stylesheet" type="text/css" href="/staticcss/bootstrap.min.css">-->
+
+
+{%block body%}
+{%include 'search.html'%}
+
+<style>
+    .contain{
+        border:2px blue;
+        height:300px;
+        width:320px;
+        margin: 10px;
+        float:right
+        padding: 5px;
+
+    }
+
+    .row{
+        margin:5px;
+        padding:5px;
+    }
+
+    .img-thumbnail{
+    padding:8px !important;
+    }
+</style>
+
+
+<body class="container-fluid bg-light">
+
+    <h1>Explore what’s streaming</h1>
+
+    <div class="container">
+        <div class="row">
+                {% for video in context %}
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                        <h6>{{video.name}}</h6>
+                    <a class="thumbnail" href="{% url 'rating' video.id %}">
+                        <img class="img-thumbnail"
+                             src="{{video.image.url}}"
+                             alt="{{video.name}}" title="{{video.name}}">
+                    </a>
+
+                    <div class="mid"> <a href="{% url 'rating' video.id %}"  class="btn btn-primary btn-sm m-2" role="button">Give Rating  </a></div>
+                </div>
+                {% endfor %}
+
+
+        </div>
+    </div>
+
+    {% if message%}
+    {{message}}
+    {%endif%}
+</body>
+
+{%endblock%}
+
